@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  web:
+    image: microsoft/aspnetcore:2.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    links:
+      - "db"
+    environment:
+      - Mongo:ConnectionString=mongodb://db:17017
+  db:
+    image: mongo
+    ports:
+      - "17017:27017"
